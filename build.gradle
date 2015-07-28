@@ -4,6 +4,14 @@ repositories {
     mavenCentral()
 }
 
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+    outputs.upToDateWhen { false }
+}
+
+
 dependencies {
     compile 'joda-time:joda-time:2.7'
     compile 'com.google.http-client:google-http-client:1.19.0'
