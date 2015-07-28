@@ -1,0 +1,13 @@
+language: java
+jdk:
+- oraclejdk8
+cache:
+  directories:
+  - $HOME/.gradle
+notifications:
+  webhooks:
+    urls:
+    - secure: feEKRGM5pwxP6FenUYuGRNgxXj4O5vQfSsm8x3Zmv//pau4CEnKJ10R58Knu4aHdNuRab5U9OZF7vtcdCOtxdUUWULmCj5XFgUOdcyXpgkdMN9zkcV54bTU2DdwRqXX19h1Uas+bTxVvJLQy+OWX9BaGXvCcHKXvhh5OmcRoLmoHcpizrnMkahAh7uaOuhqgSVV/vSRv/RLYACrIbyT40b/CXeHenraJhLZMXBYtgTkgXQaxIjXHEZp3bcuYM2ErQCoRxvT32RO+qBtWthAWhpzFATBLKIYUoyJmPUvfFuD5iGOdPEvSm7Xkwh2efLFNsRqwMJwPFg5+tCjFo/Ln2zgZ4PwNHA9BE9H4W7RderqSQlMz6N/uQDeXJJiFWB1IWZUVMuPBuM89sfALvPmlxD4jUbokJwgJBkGiX7CdNM7kZKzMytqAGBtemgwWGBSd3AY9YA/8mTR7mY18hWxAjfrAB8v7U9/BjvZycgXGO6kmAGn3gWJF7JTxwl/Awr/TrOPt/1zT0jyAc8x5YWLoiUhiA/PHcM4TmNm877jsCRROxUJgGvHlOFYKjKAYSay6Uj7CBS2OLaepclReRRXKokgdi6SZrwbBkwSAwzZ7aRoecZ0IZ2LGa0752dlHIK/ZaFd0eWlFYWBbL8n2GawlI7qp4bBzfs5T0gaSWgO8mYQ=
+  "    on_success": change
+  "    on_failure": always
+  "    on_start": false
