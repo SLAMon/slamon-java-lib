@@ -1,4 +1,29 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3.1'
+    }
+}
+
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+def getVersion = { ->
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', '--tags', '--always'
+            standardOutput = stdout
+        }
+        return stdout.toString().trim()
+    }
+    catch (ignored) {
+        return null;
+    }
+}
 
 repositories {
     mavenCentral()
@@ -10,7 +35,6 @@ test {
     }
     outputs.upToDateWhen { false }
 }
-
 
 dependencies {
     compile 'joda-time:joda-time:2.7'
@@ -24,4 +48,50 @@ dependencies {
     testCompile 'org.apache.commons:commons-io:1.3.2'
 }
 
+group = 'org.slamon'
+version = getVersion()
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['mavenJava']
+    pkg {
+        repo = 'java'
+        name = 'agent-lib'
+        userOrg = System.getenv('BINTRAY_ORG')
+        desc = 'SLAMon Agent Java library'
+        licenses = ['Apache-2.0']
+        websiteUrl = 'https://github.com/SLAMon/slamon-java-lib'
+        issueTrackerUrl = 'https://github.com/SLAMon/slamon-java-lib/issues'
+        vcsUrl = 'https://github.com/SLAMon/slamon-java-lib.git'
+        version {
+            name = project.version
+            released  = new Date()
+            vcsTag = project.version
+        }
+    }
+}
