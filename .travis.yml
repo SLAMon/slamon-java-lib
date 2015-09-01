@@ -4,10 +4,7 @@ jdk:
 cache:
   directories:
   - "$HOME/.gradle"
-after_success:
-    if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ ! -z "$BINTRAY_USER" ]; then
-        ./gradlew bintrayUpload
-    fi
+after_success: "./release.sh"
 notifications:
   webhooks:
     urls:
