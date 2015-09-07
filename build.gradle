@@ -81,9 +81,9 @@ bintray {
     publications = ['mavenJava']
     pkg {
         repo = 'java'
-        name = 'agent-lib'
+        name = 'slamon-lib'
         userOrg = System.getenv('BINTRAY_ORG')
-        desc = 'SLAMon Agent Java library'
+        desc = 'SLAMon Java library'
         licenses = ['Apache-2.0']
         websiteUrl = 'https://github.com/SLAMon/slamon-java-lib'
         issueTrackerUrl = 'https://github.com/SLAMon/slamon-java-lib/issues'
